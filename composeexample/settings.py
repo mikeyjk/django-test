@@ -1,3 +1,4 @@
+SECRET_KEY = 'abc'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

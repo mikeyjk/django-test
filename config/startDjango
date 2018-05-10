@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-python /udiomproj/udiom/manage.py runserver 0.0.0.0:80
+python /udiomproj/udiom/manage.py runserver 0:80

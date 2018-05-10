@@ -5,7 +5,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: udiom
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: udiom
   django:
     build: .
     volumes:

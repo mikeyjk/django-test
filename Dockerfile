@@ -2,4 +2,6 @@
 FROM python:3
 WORKDIR /udiomproj
 RUN pip install Django==2.0.5
-ENTRYPOINT tail -f /etc/hosts
+COPY config/startDjango /usr/local/bin
+RUN chmod +x /usr/local/bin/startDjango
+ENTRYPOINT /usr/local/bin/startDjango

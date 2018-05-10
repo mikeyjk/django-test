@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+  django:
+    build: .
+    volumes:
+      - ./udiomproj:/udiomproj
+    ports:
+      - "80"
+    depends_on:
+      - postgres

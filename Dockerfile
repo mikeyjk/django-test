@@ -1,7 +1,5 @@
-# https://docs.docker.com/compose/django
+# https://docs.djangoproject.com/en/2.0/intro/tutorial01
 FROM python:3
-RUN mkdir /code
-WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
-ADD . /code/
+WORKDIR /udiomproj
+RUN pip install Django==2.0.5
+ENTRYPOINT tail -f /etc/hosts

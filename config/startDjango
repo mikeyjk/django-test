@@ -2,8 +2,8 @@
 
 # https://stackoverflow.com/a/42308482
 # Wait for Postgres to start:
-sleep 10
-
+sleep 3
+tail -f runlog.txt &
 python /udiomproj/udiom/manage.py makemigrations userapp &>> runlog.txt
 python /udiomproj/udiom/manage.py migrate &>> runlog.txt
 python /udiomproj/udiom/manage.py runserver 0:80 &>> runlog.txt

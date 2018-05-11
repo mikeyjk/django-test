@@ -10,7 +10,7 @@ from .filters import PersonFilter
 class PersonListView(generic.ListView):
     model = Person
     form_class = CreatePersonForm
-    paginate_by = 50
+    paginate_by = 10
     ordering = ['-id']
 
 class PersonCreate(CreateView):
@@ -25,20 +25,6 @@ class PersonUpdate(UpdateView):
 class PersonDelete(DeleteView):
     model = Person
     success_url = reverse_lazy('person')
-
-def create_person(request):
-    if request.method == 'POST':
-        form = CreatePersonForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            # person.name = data.name
-            # person.email = data.email
-            # person.save()
-            form.save()
-            return HttpResponseRedirect('')
-    else:
-        form = CreatePersonForm()
-    return render(request, 'person_form.html', {'form': form})
 
 def search(request):
     person_list = Person.objects.all()

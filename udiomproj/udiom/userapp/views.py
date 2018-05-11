@@ -9,24 +9,22 @@ from .filters import PersonFilter
 
 class PersonListView(generic.ListView):
     model = Person
+    form_class = CreatePersonForm
     paginate_by = 50
     ordering = ['-id']
 
 class PersonCreate(CreateView):
     model = Person
-    fields = '__all__'
+    form_class = CreatePersonForm
     success_url = reverse_lazy('person')
 
 class PersonUpdate(UpdateView):
     model = Person
-    fields = '__all__'
+    form_class = CreatePersonForm
 
 class PersonDelete(DeleteView):
     model = Person
     success_url = reverse_lazy('person')
-
-def person_created(request):
-    return render(request, 'person_created.html')
 
 def create_person(request):
     if request.method == 'POST':
@@ -37,10 +35,10 @@ def create_person(request):
             # person.email = data.email
             # person.save()
             form.save()
-        return HttpResponseRedirect('')
+            return HttpResponseRedirect('')
     else:
         form = CreatePersonForm()
-    return render(request, 'create_person.html', {'form': form})
+    return render(request, 'person_form.html', {'form': form})
 
 def search(request):
     person_list = Person.objects.all()

@@ -2,19 +2,16 @@
 {% block content %}
   <h1>Person List</h1>
   {% if person_list %}
-  <ul>
-
-    {% for person in person_list %}
-      <li>
-        {{ person.name }}
-      </li>
-      <li>
-        {{ person.email }}
-      </li>
-    {% endfor %}
-
-  </ul>
+    <p>
+      {% for person in person_list %}
+        <ul>
+          <li>ID: {{ person.id }}</li>
+          <li>Name: {{ person.name }}</li>
+          <li>Email: {{ person.email }}</li>
+        </ul>
+      {% endfor %}
+    </p>
   {% else %}
-    <p>There are no people!</p>
+  <p>There are no people!</p>
   {% endif %}
 {% endblock %}

@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
 docker-compose down
 docker-compose build
-docker-compose up
+docker-compose up -d
+
+echo -e "\nWeb server container ID: \n"
+servip=$(docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -q) | grep django_1)
+echo "    $servip"
+
+echo -e "\nTo look @ docker-compose execution log / django web server log: \n"
+echo "    docker-compose logs -f"
+echo -e "or\n"
+echo -e "    tail -f udiomproj/runlog.txt\n\n"
+sleep 10
+tail -f udiomproj/runlog.txt

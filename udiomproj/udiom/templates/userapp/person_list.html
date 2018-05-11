@@ -2,6 +2,10 @@
 {% block content %}
   <h1>Person List</h1>
   {% if person_list %}
+    <form method="get">
+      {{ filter.form.as_p }}
+      <button type="submit">Search</button>
+    </form>
     <p>
       {% for person in person_list %}
         <ul>
@@ -10,6 +14,11 @@
           <li>Email: {{ person.email }}</li>
         </ul>
       {% endfor %}
+      <ul>
+        {% for peson in filter.qs %}
+          <li>{{ person.name }} - {{ person.email }}</li>
+        {% endfor %}
+      </ul>
     </p>
   {% else %}
   <p>There are no people!</p>

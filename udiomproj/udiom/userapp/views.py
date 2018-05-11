@@ -5,15 +5,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from .models import Person
 from .forms import CreatePersonForm
-
-def index(request):
-    # numPeople=Person.objects.all().count()
-
-    return render(
-        request,
-        'index.html',
-        # context={'numPeople':numPeople},
-    )
+from .filters import PersonFilter
 
 class PersonListView(generic.ListView):
     model = Person
@@ -23,7 +15,7 @@ class PersonListView(generic.ListView):
 class PersonCreate(CreateView):
     model = Person
     fields = '__all__'
-    success_url = reverse_lazy('people')
+    success_url = reverse_lazy('person')
 
 class PersonUpdate(UpdateView):
     model = Person
@@ -31,21 +23,26 @@ class PersonUpdate(UpdateView):
 
 class PersonDelete(DeleteView):
     model = Person
-    success_url = reverse_lazy('people')
+    success_url = reverse_lazy('person')
 
 def person_created(request):
     return render(request, 'person_created.html')
 
 def create_person(request):
-    # If this is a POST request then process the Form data
     if request.method == 'POST':
         form = CreatePersonForm(request.POST)
         if form.is_valid():
-            person = form.save(commit=False)
-            person.name = request.name
-            person.email = request.email
-            person.save()
-            return HttpResponseRedirect(reverse_lazy('person-created') )
+            data = form.cleaned_data
+            # person.name = data.name
+            # person.email = data.email
+            # person.save()
+            form.save()
+        return HttpResponseRedirect('')
     else:
         form = CreatePersonForm()
     return render(request, 'create_person.html', {'form': form})
+
+def search(request):
+    person_list = Person.objects.all()
+    person_filter = PersonFilter(request.GET, queryset=person_list)
+    return render(request, 'person_list.html', {'filter': person_filter})

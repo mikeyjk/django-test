@@ -11,15 +11,15 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
+<body style="margin-top: 2.5em">
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-2">
       {% block sidebar %}
       <ul class="sidebar-nav">
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li>All people</li>
-          <li>Create a person</li>
+          <li><a href="{% url 'person' %}">Home (People List)</a></li>
+          <li><a href="{% url 'search' %}">Search</a></li>
+          <li><a href="{% url 'person_create' %}">Create Person</a></li>
       </ul>
      {% endblock %}
       </div>

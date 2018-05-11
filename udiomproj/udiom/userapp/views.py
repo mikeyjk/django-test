@@ -17,6 +17,8 @@ def index(request):
 
 class PersonListView(generic.ListView):
     model = Person
+    paginate_by = 50
+    ordering = ['-id']
 
 class PersonCreate(CreateView):
     model = Person
